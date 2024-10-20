@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recommendations for {{ product_name }}</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to right, #6a11cb, #2575fc);
+            color: #fff;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-top: 20px;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            max-width: 1200px;
+            margin: 40px auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        li {
+            background-color: #fff;
+            color: #333;
+            border-radius: 15px;
+            margin: 15px;
+            padding: 20px;
+            width: 250px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        li:hover {
+            transform: scale(1.05);
+        }
+
+        h2 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+
+        img {
+            border-radius: 10px;
+            max-width: 100%;
+            height: auto;
+        }
+
+        p {
+            font-size: 1rem;
+            margin: 5px 0;
+        }
+
+        a {
+            text-decoration: none;
+            color: #2575fc;
+            font-weight: bold;
+            display: inline-block;
+            margin-top: 10px;
+        }
+
+        a:hover {
+            color: #6a11cb;
+        }
+
+        .container {
+            padding: 50px;
+        }
+
+        .back-link {
+            margin-top: 20px;
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #fff;
+            color: #2575fc;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .back-link:hover {
+            background-color: #6a11cb;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        {% if recommendations %}
+            <h1>Top 10 Recommendations for "{{ product_name }}"</h1>
+            <ul>
+                {% for product in recommendations %}
+                <li>
+                    <h2>{{ product.name }}</h2>
+                    <img src="{{ product.image }}" alt="{{ product.name }}">
+                    <p><strong>Discount Price:</strong> {{ product.discount_price }}</p>
+                    <p><strong>Actual Price:</strong> {{ product.actual_price }}</p>
+                    <p><strong>Ratings:</strong> {{ product.ratings }} ({{ product.no_of_ratings }} ratings)</p>
+                    <a href="{{ product.link }}" target="_blank">View Product</a>
+                </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <h1>No recommendations found for "{{ product_name }}"</h1>
+        {% endif %}
+        <a href="/" class="back-link">Go Back</a>
+    </div>
+</body>
+</html>
